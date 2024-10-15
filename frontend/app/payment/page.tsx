@@ -3,17 +3,20 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, LogOut, Settings, User } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Link from "next/link";
 import PricingPage from "./paymenttable";
 
 export default function Dashboard() {
-  const [isSubscribed, setIsSubscribed] = useState(false);
-  const [currentPlan, setCurrentPlan] = useState(
+  const [
+    isSubscribed
+    // setIsSubscribed
+  ] = useState(false);
+  const [
+    currentPlan
+    //  setCurrentPlan
+  ] = useState(
     isSubscribed
       ? {
           name: "Standard",
@@ -22,7 +25,7 @@ export default function Dashboard() {
         }
       : null
   );
-  const [showPricingTable, setShowPricingTable] = useState(false);
+  // const [showPricingTable, setShowPricingTable] = useState(false);
 
   const transactionHistory = isSubscribed
     ? [

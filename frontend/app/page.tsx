@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { MapPin, Home, Building2, Save, Trash2, Trees, DollarSign, X, Building } from "lucide-react";
+import { MapPin, Home, Building2, Save, Trash2, Trees, DollarSign, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,9 +12,6 @@ import { Switch } from "@/components/ui/switch";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuCheckboxItem } from "@radix-ui/react-dropdown-menu";
-import Link from "next/link";
-import Header from "@/components/Header";
 
 const prefectures = [
   "北海道",
@@ -66,7 +63,12 @@ const prefectures = [
   "沖縄県"
 ];
 
-const SelectedLocations = ({ locations, onRemove }) => {
+interface SelectedLocationsProps {
+  locations: string[];
+  onRemove: (location: string) => void;
+}
+
+const SelectedLocations: React.FC<SelectedLocationsProps> = ({ locations, onRemove }) => {
   return (
     <div className="flex flex-wrap gap-2 mt-2">
       {locations.map((location) => (
@@ -281,7 +283,7 @@ export default function Component() {
     { value: "1500", label: "1500m2以下" }
   ];
 
-  const structures: { value: BuildingStructure; label: string }[] = [
+  const structures: { value: string; label: string }[] = [
     { value: "RC", label: "RC造" },
     { value: "Steel", label: "鉄骨造" },
     { value: "SRC", label: "SRC造" },

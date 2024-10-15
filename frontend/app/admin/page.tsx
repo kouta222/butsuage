@@ -9,7 +9,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Users, Search, Edit, Trash2, Plus, Clock, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
+import { Search, Edit, Trash2, Plus, Clock, ArrowUpDown, ArrowUp, ArrowDown } from "lucide-react";
 
 type Account = {
   id: number;
@@ -140,7 +140,7 @@ export default function AdminScreen() {
                         </SelectContent>
                       </Select>
                     </div>
-                    <Button type="submit" className="w-full">
+                    <Button type="submit" className="w-full" onClick={() => setAccounts([...accounts, { id: accounts.length + 1, companyName: "新規アカウント", email: "new_account@example.com", status: "active", plan: "standard" }])}>
                       作成
                     </Button>
                   </form>

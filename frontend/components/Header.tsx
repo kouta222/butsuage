@@ -12,7 +12,7 @@ const Header = () => {
             <DropdownMenuTrigger asChild>
               <Button variant="outline">株式会社UNICS</Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 z-50 bg-white	text-center	gap-2 border-2	rounded-sm	">
+            <DropdownMenuContent className="w-56 z-50 bg-white	text-center	gap-5 border-2	rounded-sm	mx-5 ">
               <DropdownMenuLabel>株式会社UNICS</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuCheckboxItem>
@@ -21,7 +21,9 @@ const Header = () => {
               <DropdownMenuCheckboxItem>
                 <Link href="/payment">支払い情報</Link>
               </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem>ログアウト</DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem>
+                <Link href="/login">ログアウト</Link>
+              </DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

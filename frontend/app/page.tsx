@@ -84,12 +84,12 @@ const SelectedLocations = ({ locations, onRemove }) => {
 export default function Component() {
   const [propertyType, setPropertyType] = useState("income");
   const [incomePropertyType, setIncomePropertyType] = useState("apartment");
-  const [priceLower, setPriceLower] = useState("none");
-  const [priceUpper, setPriceUpper] = useState("none");
-  const [ageLower, setAgeLower] = useState("none");
-  const [ageUpper, setAgeUpper] = useState("none");
-  const [yieldLower, setYieldLower] = useState("none");
-  const [yieldUpper, setYieldUpper] = useState("none");
+  const [priceLower, setPriceLower] = useState("0");
+  const [priceUpper, setPriceUpper] = useState("0");
+  const [ageLower, setAgeLower] = useState("0");
+  const [ageUpper, setAgeUpper] = useState("0");
+  const [yieldLower, setYieldLower] = useState("0");
+  const [yieldUpper, setYieldUpper] = useState("0");
   const [conditionName, setConditionName] = useState("");
   const [savedConditions, setSavedConditions] = useState([
     { id: 1, name: "東京都心部の高級マンション", active: true },
@@ -122,35 +122,163 @@ export default function Component() {
     setSelectedLocations((prev) => prev.filter((l) => l !== location));
   };
 
-  const priceOptions = [
-    { value: "none", label: "下限なし" },
-    { value: "1000", label: "1,000万円" },
-    { value: "2000", label: "2,000万円" },
-    { value: "3000", label: "3,000万円" },
-    { value: "5000", label: "5,000万円" },
-    { value: "10000", label: "1億円" },
-    { value: "20000", label: "2億円" },
-    { value: "30000", label: "3億円" }
+  const maxPriceOptions = [
+    { value: "0", label: "上限なし" },
+    { value: "300", label: "300万円以下" },
+    { value: "500", label: "500万円以下" },
+    { value: "800", label: "800万円以下" },
+    { value: "1000", label: "1,000万円以下" },
+    { value: "2000", label: "2,000万円以下" },
+    { value: "2500", label: "2,500万円以下" },
+    { value: "3000", label: "3,000万円以下" },
+    { value: "3500", label: "3,500万円以下" },
+    { value: "4000", label: "4,000万円以下" },
+    { value: "4000", label: "4,000万円以下" },
+    { value: "5000", label: "5,000万円以下" },
+    { value: "6000", label: "6,000万円以下" },
+    { value: "7000", label: "7,000万円以下" },
+    { value: "8000", label: "8,000万円以下" },
+    { value: "9000", label: "9,000万円以下" },
+    { value: "10000", label: "1億円以下" },
+    { value: "20000", label: "2億円以下" },
+    { value: "30000", label: "3億円以下" },
+    { value: "50000", label: "5億円以下" }
+  ];
+  const minPriceOptions = [
+    { value: "0", label: "下限なし" },
+    { value: "300", label: "300万円以上" },
+    { value: "500", label: "500万円以上" },
+    { value: "800", label: "800万円以上" },
+    { value: "1000", label: "1,000万円以上" },
+    { value: "2000", label: "2,000万円以上" },
+    { value: "2500", label: "2,500万円以上" },
+    { value: "3000", label: "3,000万円以上" },
+    { value: "3500", label: "3,500万円以上" },
+    { value: "4000", label: "4,000万円以上" },
+    { value: "4000", label: "4,000万円以上" },
+    { value: "5000", label: "5,000万円以上" },
+    { value: "6000", label: "6,000万円以上" },
+    { value: "7000", label: "7,000万円以上" },
+    { value: "8000", label: "8,000万円以上" },
+    { value: "9000", label: "9,000万円" },
+    { value: "10000", label: "1億円以上" },
+    { value: "20000", label: "2億円以上" },
+    { value: "30000", label: "3億円以上" },
+    { value: "50000", label: "5億円以上" }
   ];
 
-  const ageOptions = [
-    { value: "none", label: "下限なし" },
-    { value: "1", label: "1年" },
-    { value: "3", label: "3年" },
-    { value: "5", label: "5年" },
-    { value: "10", label: "10年" },
-    { value: "15", label: "15年" },
-    { value: "20", label: "20年" },
-    { value: "30", label: "30年" }
+  const maxAgeOptions = [
+    { value: "0", label: "下限なし" },
+    { value: "1", label: "1年以上" },
+    { value: "3", label: "3年以上" },
+    { value: "5", label: "5年以上" },
+    { value: "10", label: "10年以上" },
+    { value: "15", label: "15年以上" },
+    { value: "20", label: "20年以上" },
+    { value: "30", label: "30年以上" },
+    { value: "35", label: "35年以上" },
+    { value: "40", label: "40年以上" }
+  ];
+  const minAgeOptions = [
+    { value: "0", label: "上限なし" },
+    { value: "1", label: "1年以下" },
+    { value: "3", label: "3年以下" },
+    { value: "5", label: "5年以下" },
+    { value: "10", label: "10年以下" },
+    { value: "15", label: "15年以下" },
+    { value: "20", label: "20年以下" },
+    { value: "30", label: "30年以下" },
+    { value: "35", label: "35年以下" },
+    { value: "40", label: "40年以下" }
   ];
 
-  const yieldOptions = [
-    { value: "none", label: "下限なし" },
-    { value: "3", label: "3%" },
-    { value: "5", label: "5%" },
-    { value: "7", label: "7%" },
-    { value: "10", label: "10%" },
-    { value: "15", label: "15%" }
+  const minyieldOptions = [
+    { value: "0", label: "下限なし" },
+    { value: "50", label: "50%以上" },
+    { value: "100", label: "100%以上" },
+    { value: "150", label: "150%以上" },
+    { value: "200", label: "200%以上" },
+    { value: "300", label: "300%以上" },
+    { value: "400", label: "400%以上" },
+    { value: "500", label: "500%以上" }
+  ];
+
+  const maxyieldOptions = [
+    { value: "0", label: "上限なし" },
+    { value: "50", label: "50%以下" },
+    { value: "100", label: "100%以下" },
+    { value: "150", label: "150%以下" },
+    { value: "200", label: "200%以下" },
+    { value: "300", label: "300%以下" },
+    { value: "400", label: "400%以下" },
+    { value: "500", label: "500%以下" }
+  ];
+
+  const minlandOptions = [
+    { value: "0", label: "下限なし" },
+    { value: "50", label: "50m2以上" },
+    { value: "100", label: "100m2以上" },
+    { value: "150", label: "150m2以上" },
+    { value: "200", label: "200m2以上" },
+    { value: "250", label: "250m2以上" },
+    { value: "300", label: "300m2以上" },
+    { value: "350", label: "350m2以上" },
+    { value: "400", label: "400m2以上" },
+    { value: "450", label: "450m2以上" },
+    { value: "500", label: "500m2以上" },
+    { value: "550", label: "550m2以上" },
+    { value: "600", label: "600m2以上" },
+    { value: "650", label: "650m2以上" },
+    { value: "700", label: "700m2以上" },
+    { value: "750", label: "750m2以上" },
+    { value: "800", label: "800m2以上" },
+    { value: "850", label: "850m2以上" },
+    { value: "900", label: "900m2以上" },
+    { value: "950", label: "950m2以上" },
+    { value: "1000", label: "1000m2以上" },
+    { value: "1050", label: "1050m2以上" },
+    { value: "1100", label: "1100m2以上" },
+    { value: "1150", label: "1150m2以上" },
+    { value: "1200", label: "1200m2以上" },
+    { value: "1250", label: "1250m2以上" },
+    { value: "1300", label: "1300m2以上" },
+    { value: "1350", label: "1350m2以上" },
+    { value: "1400", label: "1400m2以上" },
+    { value: "1450", label: "1450m2以上" },
+    { value: "1500", label: "1500m2以上" }
+  ];
+  const maxlandOptions = [
+    { value: "0", label: "上限なし" },
+    { value: "50", label: "50m2以下" },
+    { value: "100", label: "100m2以下" },
+    { value: "150", label: "150m2以下" },
+    { value: "200", label: "200m2以下" },
+    { value: "250", label: "250m2以下" },
+    { value: "300", label: "300m2以下" },
+    { value: "350", label: "350m2以下" },
+    { value: "400", label: "400m2以下" },
+    { value: "450", label: "450m2以下" },
+    { value: "500", label: "500m2以下" },
+    { value: "550", label: "550m2以下" },
+    { value: "600", label: "600m2以下" },
+    { value: "650", label: "650m2以下" },
+    { value: "700", label: "700m2以下" },
+    { value: "750", label: "750m2以下" },
+    { value: "800", label: "800m2以下" },
+    { value: "850", label: "850m2以下" },
+    { value: "900", label: "900m2以下" },
+    { value: "950", label: "950m2以下" },
+    { value: "1000", label: "1000m2以下" },
+    { value: "1050", label: "1050m2以下" },
+    { value: "1100", label: "1100m2以下" },
+    { value: "1150", label: "1150m2以下" },
+    { value: "1200", label: "1200m2以下" },
+    { value: "1250", label: "1250m2以下" },
+    { value: "1300", label: "1300m2以下" },
+    { value: "1350", label: "1350m2以下" },
+    { value: "1400", label: "1400m2以下" },
+    { value: "1450", label: "1450m2以下" },
+    { value: "1500", label: "1500m2以下" }
   ];
 
   const structures: { value: BuildingStructure; label: string }[] = [
@@ -227,10 +355,10 @@ export default function Component() {
                   <div className="flex items-center space-x-2">
                     <Select value={priceLower} onValueChange={setPriceLower}>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="下限なし" />
+                        <SelectValue placeholder="下限なし" defaultValue={"0"} />
                       </SelectTrigger>
                       <SelectContent>
-                        {priceOptions.map((option) => (
+                        {minPriceOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>
@@ -240,10 +368,10 @@ export default function Component() {
                     <span>〜</span>
                     <Select value={priceUpper} onValueChange={setPriceUpper}>
                       <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="上限なし" />
+                        <SelectValue placeholder="上限なし" defaultValue={"0"} />
                       </SelectTrigger>
                       <SelectContent>
-                        {[...priceOptions.slice(1), { value: "none", label: "上限なし" }].map((option) => (
+                        {maxPriceOptions.map((option) => (
                           <SelectItem key={option.value} value={option.value}>
                             {option.label}
                           </SelectItem>
@@ -391,7 +519,7 @@ export default function Component() {
                             <SelectValue placeholder="下限なし" />
                           </SelectTrigger>
                           <SelectContent>
-                            {yieldOptions.map((option) => (
+                            {minyieldOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>
@@ -404,7 +532,7 @@ export default function Component() {
                             <SelectValue placeholder="上限なし" />
                           </SelectTrigger>
                           <SelectContent>
-                            {[...yieldOptions.slice(1), { value: "none", label: "上限なし" }].map((option) => (
+                            {maxyieldOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>
@@ -421,10 +549,10 @@ export default function Component() {
                       <div className="flex items-center space-x-2">
                         <Select value={yieldLower} onValueChange={setYieldLower}>
                           <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="下限なし" />
+                            <SelectValue placeholder="下限なし" defaultValue={"0"} />
                           </SelectTrigger>
                           <SelectContent>
-                            {yieldOptions.map((option) => (
+                            {minyieldOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>
@@ -434,10 +562,10 @@ export default function Component() {
                         <span>〜</span>
                         <Select value={yieldUpper} onValueChange={setYieldUpper}>
                           <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="上限なし" />
+                            <SelectValue placeholder="上限なし" defaultValue={"0"} />
                           </SelectTrigger>
                           <SelectContent>
-                            {[...yieldOptions.slice(1), { value: "none", label: "上限なし" }].map((option) => (
+                            {minyieldOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>
@@ -461,7 +589,7 @@ export default function Component() {
                           <SelectValue placeholder="下限なし" />
                         </SelectTrigger>
                         <SelectContent>
-                          {ageOptions.map((option) => (
+                          {minAgeOptions.map((option) => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
@@ -471,10 +599,10 @@ export default function Component() {
                       <span>〜</span>
                       <Select value={ageUpper} onValueChange={setAgeUpper}>
                         <SelectTrigger className="w-[180px]">
-                          <SelectValue placeholder="上限なし" />
+                          <SelectValue placeholder="上限なし"></SelectValue>
                         </SelectTrigger>
                         <SelectContent>
-                          {[...ageOptions.slice(1), { value: "none", label: "上限なし" }].map((option) => (
+                          {maxAgeOptions.map((option) => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
                             </SelectItem>
@@ -492,10 +620,10 @@ export default function Component() {
                       <div className="flex items-center space-x-2">
                         <Select value={yieldLower} onValueChange={setYieldLower}>
                           <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="下限なし" />
+                            <SelectValue placeholder="下限なし" defaultValue={"0"} />
                           </SelectTrigger>
                           <SelectContent>
-                            {yieldOptions.map((option) => (
+                            {minlandOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>
@@ -505,10 +633,10 @@ export default function Component() {
                         <span>〜</span>
                         <Select value={yieldUpper} onValueChange={setYieldUpper}>
                           <SelectTrigger className="w-[180px]">
-                            <SelectValue placeholder="上限なし" />
+                            <SelectValue placeholder="上限なし" defaultValue={"0"} />
                           </SelectTrigger>
                           <SelectContent>
-                            {[...yieldOptions.slice(1), { value: "none", label: "上限なし" }].map((option) => (
+                            {maxlandOptions.map((option) => (
                               <SelectItem key={option.value} value={option.value}>
                                 {option.label}
                               </SelectItem>

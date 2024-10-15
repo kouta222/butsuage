@@ -37,7 +37,8 @@ const initialAccounts: Account[] = [
   { id: 2, companyName: "株式会社B", email: "company_b@example.com", status: "cancelled", plan: "advance" },
   { id: 3, companyName: "株式会社C", email: "company_c@example.com", status: "inactive", plan: "premium" },
   { id: 4, companyName: "株式会社D", email: "company_d@example.com", status: "active", plan: "standard" },
-  { id: 5, companyName: "株式会社E", email: "company_e@example.com", status: "active", plan: "premium" }
+  { id: 5, companyName: "株式会社E", email: "company_e@example.com", status: "active", plan: "premium" },
+  { id: 6, companyName: "株式会社F", email: "company_e@example.com", status: "active", plan: "premium" }
 ];
 
 export default function AdminScreen() {
